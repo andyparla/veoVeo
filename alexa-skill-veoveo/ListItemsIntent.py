@@ -10,6 +10,11 @@ clase que define realmente lo que hace nuestra skill
 
 
 class ListItemsIntent(AbstractRequestHandler):
+    def __init__(self):
+        self.searchObjects = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+                         "k", "l", "m", "n", "ñ", "o", "p", "q", "r", "s",
+                         "t", "u", "v", "w", "x", "y", "z"]
+
     def can_handle(self, handler_input):
         return is_intent_name("ListItemsIntent")(handler_input)
 
@@ -20,9 +25,9 @@ class ListItemsIntent(AbstractRequestHandler):
         for slotName, currentSlot in six.iteritems(slots):
             if slotName == 'letra':
                 if currentSlot.value:
-                    objs_to_search = sample(searchObjects, int(currentSlot.value))
+                    objs_to_search = sample(self.searchObjects, int(currentSlot.value))
                 else:
-                    objs_to_search = sample(searchObjects, defaultObjsToSearch)
+                    objs_to_search = sample(self.searchObjects, defaultObjsToSearch)
         speech_text = "<say-as interpret-as=\"interjection\">Magnífico!</say-as>. Aquí van, prestad atención: {0}. A " \
                       "divertirse!. <say-as interpret-as=\"interjection\">Suerte!</say-as>." \
             .format(", ".join(objs_to_search))
