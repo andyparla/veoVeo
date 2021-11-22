@@ -1,7 +1,7 @@
-from ask_sdk_core.dispatch_components import AbstractRequestHandler, AbstractExceptionHandler
+from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.utils import is_intent_name
 import logging
-from random import sample, random
+import random
 from diccionario import objetos
 import six
 
@@ -16,17 +16,24 @@ class ListItemsIntent(AbstractRequestHandler):
 
     def handle(self, handler_input):
         slots = handler_input.request_envelope.request.intent.slots
-
+        letra_escogida = None
+        objs_could_see = None
         for slotName, currentSlot in six.iteritems(slots):
             if slotName == 'letra':
                 if currentSlot.value:
-                    objs_could_see = random.choice(objetos.get(currentSlot.value))
+                    if currentSlot.value in objetos.keys():
+                        objs_could_see = random.choice(objetos.get(currentSlot.value))
+                    else:
+                        letra_escogida = currentSlot.value
                 else:
-                    #objs_could_see = sample(self.searchObjects, defaultObjsToSearch)
-                    logging.error("No se ha detectado la letra indicada")
-        speech_text = "<say-as interpret-as=\"interjection\">Magnífico!</say-as>. Aquí van, prestad atención: {0}. A " \
-                      "divertirse!. <say-as interpret-as=\"interjection\">Suerte!</say-as>." \
-            .format(", ".join(objs_could_see))
+                    letra_escogida = currentSlot.value
+                    logging.error(f"No se ha detectado la letra {currentSlot.value}")
+        alexa_dice = "No se me ocurre nada que empiece por la letra {0}".format(letra_escogida)
+
+        if objs_could_see is not None:
+            alexa_dice = "Creo que es : {0}. Es correcto?".format(objs_could_see)
+
+        speech_text = alexa_dice
 
         logging.info(objs_could_see)
         logging.info(speech_text)
