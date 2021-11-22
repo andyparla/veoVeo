@@ -31,7 +31,7 @@ class ListItemsIntent(AbstractRequestHandler):
         alexa_dice = "No se me ocurre nada que empiece por la letra {0}".format(letra_escogida)
 
         if objs_could_see is not None:
-            alexa_dice = "Creo que es : {0}. Es correcto?".format(objs_could_see)
+            alexa_dice = "Creo que es : {0}. ¿Es correcto?".format(objs_could_see)
 
         speech_text = alexa_dice
 
