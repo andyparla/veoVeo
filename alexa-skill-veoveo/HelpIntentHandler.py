@@ -12,7 +12,7 @@ class HelpIntentHandler(AbstractRequestHandler):
         return is_intent_name("AMAZON.HelpIntent")(handler_input)
 
     def handle(self, handler_input):
-        speech_text = "Bienvenidos a la ayuda de Exploradores Fantásticos!. Sólo debes decirme una letra y adivinaré" \
-                      "lo que ves"
+        speech_text = "¡Bienvenidos a la aplicación Veo Veo!. Comienza diciendo veo veo, después debes decirme una " \
+                      "letra y adivinaré lo que ves "
 
         return handler_input.response_builder.speak(speech_text).response

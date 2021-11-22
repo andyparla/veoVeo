@@ -5,6 +5,7 @@ from CancelAndStopIntentHandler import CancelAndStopIntentHandler
 from SessionEndedRequestHandler import SessionEndedRequestHandler
 from ListItemsIntent import ListItemsIntent
 from AllExceptionsHandler import AllExceptionsHandler
+from CositaIntent import CositaIntent
 import logging
 
 sb = SkillBuilder()
@@ -13,7 +14,9 @@ sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelAndStopIntentHandler())
 sb.add_request_handler(SessionEndedRequestHandler())
 sb.add_request_handler(ListItemsIntent())
+sb.add_request_handler(CositaIntent())
 sb.add_exception_handler(AllExceptionsHandler())
+
 
 handler = sb.lambda_handler()
 logging.basicConfig(level=logging.INFO)

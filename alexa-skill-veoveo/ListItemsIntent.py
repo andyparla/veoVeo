@@ -28,12 +28,12 @@ class ListItemsIntent(AbstractRequestHandler):
                 else:
                     letra_escogida = currentSlot.value
                     logging.error(f"No se ha detectado la letra {currentSlot.value}")
-        alexa_dice = "No se me ocurre nada que empiece por la letra {0}".format(letra_escogida)
+        respuesta = "No se me ocurre nada que empiece por la letra {0}".format(letra_escogida)
 
         if objs_could_see is not None:
-            alexa_dice = "Creo que es : {0}. ¿Es correcto?".format(objs_could_see)
+            respuesta = "<say-as interpret-as=\"interjection\">Creo que es {0}.</say-as> ¿Es correcto?".format(objs_could_see)
 
-        speech_text = alexa_dice
+        speech_text = respuesta
 
         logging.info(objs_could_see)
         logging.info(speech_text)
