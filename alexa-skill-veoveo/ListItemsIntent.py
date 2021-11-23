@@ -16,7 +16,7 @@ class ListItemsIntent(AbstractRequestHandler):
 
     def handle(self, handler_input):
         slots = handler_input.request_envelope.request.intent.slots
-        session_attr = handler_input.attributes_manager.session_attributes
+        #session_attr = handler_input.attributes_manager.session_attributes
         letra_escogida = None
         objs_could_see = None
         if slots is not None:
@@ -31,13 +31,13 @@ class ListItemsIntent(AbstractRequestHandler):
                         letra_escogida = currentSlot.value
                         logging.error(f"No se ha detectado la letra {currentSlot.value}")
         else:
-            letra_escogida = session_attr.get("letraEscogida")
+            #letra_escogida = session_attr.get("letraEscogida")
             objs_could_see = self.buscar_objeto(letra_escogida)
 
         respuesta = "No se me ocurre nada que empiece por la letra {0}".format(letra_escogida)
 
         if objs_could_see is not None:
-            session_attr["letraEscogida"] = objs_could_see
+            #session_attr["letraEscogida"] = objs_could_see
             respuesta = "<say-as interpret-as=\"interjection\">Creo que es {0}.</say-as> ¿Es correcto?".format(
                 objs_could_see)
 
