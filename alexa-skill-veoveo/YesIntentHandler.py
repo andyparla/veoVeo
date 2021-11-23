@@ -7,11 +7,11 @@ que sucede cuando el usuario dice, por ejemplo, ayuda
 """
 
 
-class HelpIntentHandler(AbstractRequestHandler):
+class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return is_intent_name("AMAZON.HelpIntent")(handler_input)
+        return is_intent_name("AMAZON.YesIntent")(handler_input)
 
     def handle(self, handler_input):
-        speech_text = "¡Bien he acertado! intenta ponérmelo más dificil "
+        speech_text = "¡Bien he acertado! intenta ponérmelo más dificil."
 
         return handler_input.response_builder.speak(speech_text).response

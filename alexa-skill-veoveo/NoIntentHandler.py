@@ -7,11 +7,14 @@ que sucede cuando el usuario dice, por ejemplo, ayuda
 """
 
 
-class HelpIntentHandler(AbstractRequestHandler):
+class NoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return is_intent_name("AMAZON.HelpIntent")(handler_input)
+        return is_intent_name("AMAZON.NoIntent")(handler_input)
 
     def handle(self, handler_input):
-        speech_text = "¡ohhh! Déjame intentarlo de nuevo"
+        session_attr = handler_input.attributes_manager.session_attributes
+        if "letraEscogida" in session_attr:
+            fav_color = session_attr["letraEscogida"]
+        speech_text = "¡ohhh! Déjame intentarlo de nuevo."
 
         return handler_input.response_builder.speak(speech_text).response
